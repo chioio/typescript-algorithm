@@ -1,7 +1,7 @@
 /**
  * QuickSelect
  *
- * 快速选择是一种从无序列表中找到第k小元素的选择算法。
+ * 快速选择是一种从无序列表中找到第k个最小的元素的选择算法。
  *
  * @复杂度 O(n)   平均复杂度
  * @复杂度 O(n^2) 最坏的情况
@@ -41,29 +41,41 @@ export class QuickSelectFR {
         new QuickSelectFR(this.arr, this.kth, newLeft, newRight);
       }
 
+      // 标记 arr[kth]
       const t = this.arr[this.kth];
+      // 标记左下标
       let i = left;
+      // 标记右下标
       let j = right;
 
+      // 交换 arr[kth] 和 arr[left]
       this.swap(this.arr, left, this.kth);
+      // 判断 arr[kth] 右边元素是否大于 arr[kth]
       if (this.arr[right] > t) this.swap(this.arr, left, right);
 
+      // 遍历 arr
       while (i < j) {
+        // 交换 arr[i] 和 arr[j]
         this.swap(this.arr, i, j);
         i++;
         j--;
+        // 当 arr[i] 小于 arr[kth]
         while (this.arr[i] < t) i++;
+        // 当 arr[j] 大于 arr[kth]
         while (this.arr[j] > t) j--;
       }
 
-      if (this.arr[left] === t) this.swap(this.arr, left, j);
-      else {
+      if (this.arr[left] === t) {
+        // 交换 arr[left] 和 arr[j]
+        this.swap(this.arr, left, j);
+      } else {
         j++;
+        // 交换 arr[right] 和 arr[j]
         this.swap(this.arr, j, right);
       }
 
       if (j <= this.kth) left = j + 1;
-      if (this.kth <= j) right = j - 1;
+      if (j >= this.kth) right = j - 1;
     }
   }
 
