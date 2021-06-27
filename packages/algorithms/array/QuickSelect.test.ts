@@ -1,4 +1,4 @@
-import { assertEquals } from 'https://deno.land/std/testing/asserts.ts';
+import { assertEquals } from 'https://deno.land/std@0.99.0/testing/asserts.ts';
 import { QuickSelectFR } from './QuickSelect.ts';
 
 Deno.test('QuickSelectFR 短数组', () => {
